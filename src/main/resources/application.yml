@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://192.168.1.222:5433/guidance
+    username: hfcb
+    password: hfcb
+    driver-class-name: org.postgresql.Driver
+    max-active: 2
+  cloud:
+    stream:
+      bindings:
+        people:
+          destination: testTopic
+          content-type: application/json
+
+spring.cloud.stream.kafka.binder.headers: type
+spring.cloud.stream.kafka.bindings.input.consumer.resetOffsets: false
+spring.cloud.stream.kafka.bindings.input.consumer.startOffset: latest
+spring.cloud.stream.kafka.binder.zkNodes: localhost
+spring.cloud.stream.kafka.binder.brokers: localhost
